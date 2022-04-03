@@ -42,8 +42,8 @@ const ActivateAccountScreen2 = () => {
             <NewButton
                 width_="100%"
                 content_="GUARDAR DATOS"
-                link_="ActivatedAccountScreen">
-            </NewButton>
+                link_="ActivatedAccountScreen"
+            />
         </View>
     )
 }

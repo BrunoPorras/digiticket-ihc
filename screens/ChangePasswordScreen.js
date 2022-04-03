@@ -46,8 +46,8 @@ const ChangePasswordScreen = () => {
             <NewButton
                 width_={"70%"}
                 content_={"GUARDAR CONTRASEÑA"}
-                link_={"HomeScreen"}>
-            </NewButton>
+                link_={"HomeScreen"}
+            />
         </View>
     )
 }

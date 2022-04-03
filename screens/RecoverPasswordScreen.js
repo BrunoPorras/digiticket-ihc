@@ -40,8 +40,8 @@ const RecoverPasswordScreen = () => {
             <NewButton
                 width_={"70%"}
                 content_={"SIGUIENTE"}
-                link_={"ChangePasswordScreen"}>
-            </NewButton>
+                link_={"ChangePasswordScreen"}
+            />
             <View style={styles.sendMailContainer}>
                 <Image
                     style={styles.icons}

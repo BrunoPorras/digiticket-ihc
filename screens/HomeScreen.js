@@ -32,8 +32,8 @@ const HomeScreen = () => {
             <NewButton
                 width_="60%"
                 content_="SIGUIENTE"
-                link_="ActivateAccountScreen1">
-            </NewButton>
+                link_="ActivateAccountScreen1"
+            />
             <View style={styles.notAccountContainer}>
                 <Text style={styles.notAccountText}>
                     ¿No tienes una cuenta?

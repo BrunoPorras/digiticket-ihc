@@ -42,8 +42,8 @@ const ActivatedAccountScreen = () => {
             <NewButton
                 width_={"60%"}
                 content_={"INGRESAR"}
-                link_={"GA"}>
-            </NewButton>
+                link_={"GA"}
+            />
             <Text
                 style={styles.forgotPassText}
                 onPress={handleRecoverPassword}>

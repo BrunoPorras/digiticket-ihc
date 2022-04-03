@@ -62,8 +62,8 @@ const ActivateAccountScreen1 = () => {
             <NewButton
                 content_="SIGUIENTE"
                 width_="100%"
-                link_="ActivateAccountScreen2">    
-            </NewButton>
+                link_="ActivateAccountScreen2"
+            />
         </View>
     )
 }
