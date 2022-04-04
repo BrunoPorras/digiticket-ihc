@@ -65,8 +65,8 @@ const ActivateAccountScreen2 = () => {
                         setExpanded(!expanded);
                     }}>
                     {sedes.map((sede) => (
-                        <ListItem key={sede.name} onPress={(e)=> setSede(sede.name)} bottomDivider
-                        containerStyle={styles.listItem}>
+                        <ListItem key={sede.name} onPress={(e)=> setSede(sede.name)}
+                        containerStyle={styles.listItems}>
                             <ListItem.Content>
                                 <ListItem.Title>{sede.name}</ListItem.Title>
                             </ListItem.Content>
@@ -116,17 +116,21 @@ const styles = StyleSheet.create({
         height: 25
     },
     inputDropContainer: {
-        marginBottom: 10 
-    },
-    listContainer: {
-        borderBottomColor: "#B2B2B2",
+        marginBottom: 25
     },
     listItem: {
-        backgroundColor: "#F2F2F2"
+        backgroundColor: "#F2F2F2",
+        borderBottomColor: "#B2B2B2",
+        borderBottomWidth: 1
     },
     listItemTittle: {
         color: "#B2B2B2"
-    }
+    },
+    listItems: {
+        backgroundColor: "#EEEEEE",
+        borderBottomColor: "#B2B2B2",
+        borderBottomWidth: .5
+    },
 });
 
 export default ActivateAccountScreen2
