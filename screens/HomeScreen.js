@@ -25,6 +25,11 @@ const HomeScreen = () => {
                 </Image>
             </View>
             <View style={styles.rememberUserContainer}>
+                <CheckBox
+                    center
+                    checked={isSelected}
+                    onPress={() => setSelection(!isSelected)}>
+                </CheckBox>
                 <Text style={styles.rememberUserText}>
                     Recordar usuario
                 </Text>
@@ -76,9 +81,9 @@ const styles = StyleSheet.create({
     rememberUserContainer: {
         display: "flex",
         flexDirection: "row",
-        justifyContent: "space-around",
+        justifyContent: "space-evenly",
         alignItems: "center",
-        width: "70%",
+        width: "40%",
         paddingVertical: 50
     },
     rememberUserText: {

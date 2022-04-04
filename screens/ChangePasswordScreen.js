@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
-import { View, Text, Button, CheckBox, StyleSheet, TextInput, Image } from 'react-native'
+import { View, Text, Button, StyleSheet, TextInput, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-
+import { CheckBox } from 'react-native-elements'
 import keyIcon from '../assets/look2.png'
 import NewButton from '../components/buttons'
 
 const ChangePasswordScreen = () => {
-    
+
+    const [isSelected, setSelection] = useState(false)
+
     return (
         <View style={styles.container}>
             <Text style={styles.tittle}>
@@ -39,6 +41,11 @@ const ChangePasswordScreen = () => {
                 Utiliza al menos 8 caracteres.
             </Text>
             <View style={styles.viewPassContainer}>
+                <CheckBox
+                    center
+                    checked={isSelected}
+                    onPress={() => setSelection(!isSelected)}>
+                </CheckBox>
                 <Text>
                     Ver contraseña
                 </Text>
@@ -86,7 +93,7 @@ const styles = StyleSheet.create({
     },
     icons: {
         width: 20,
-        height: 20        
+        height: 20
     },
     textAlert: {
         fontSize: 17,
@@ -96,9 +103,10 @@ const styles = StyleSheet.create({
     viewPassContainer: {
         display: "flex",
         flexDirection: "row",
-        justifyContent: "space-evenly",
-        width: "60%",
-        paddingVertical: 30
+        justifyContent: "space-around",
+        alignItems: "center",
+        width: "40%",
+        paddingVertical: 40
     }
 })
 

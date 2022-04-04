@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, Button, StyleSheet, TextInput, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import NewButton from '../components/buttons'
 import userIcon from '../assets/user.png'
 import look1Icon from '../assets/look1.png'
 import look2Icon from '../assets/look2.png'
+import { CheckBox } from 'react-native-elements'
 
 const ActivateAccountScreen1 = () => {
-    
+
+    const [isSelected, setSelection] = useState(false)
+
     return (
         <View style={styles.container}>
             <Text style={styles.tittle}>
@@ -56,8 +59,15 @@ const ActivateAccountScreen1 = () => {
             <Text style={styles.simpleText}>
                 Utiliza al menos 8 caracteres
             </Text>
-            <View style={styles.checkBoxContainer}>
-                <Text>Ver contraseña</Text>
+            <View style={styles.centerContainer}>
+                <View style={styles.checkBoxContainer}>
+                    <CheckBox
+                        center
+                        checked={isSelected}
+                        onPress={() => setSelection(!isSelected)}>
+                    </CheckBox>
+                    <Text>Ver contraseña</Text>
+                </View>
             </View>
             <NewButton
                 content_="SIGUIENTE"
@@ -96,13 +106,18 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: "#B2B2B2"
     },
+    centerContainer: {
+        alignItems: "center",
+        width: "100%"
+    },
     checkBoxContainer: {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-around",
-        width: "100%",
-        marginVertical: 40
+        justifyContent: "space-evenly",
+        width: "40%",
+        marginVertical: 40,
+        marginHorizontal: "auto"
     },
     icons: {
         width: 20,

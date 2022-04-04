@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text, Button, StyleSheet, TextInput, Image } from 'react-native'
-import CheckBox from '@react-native-community/checkbox'
-import { Icon, Input } from 'react-native-elements'
+import { Icon, Input, CheckBox } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
 
 import lookIcon from '../assets/look1.png'
@@ -35,6 +34,11 @@ const ActivatedAccountScreen = () => {
                 </Image>
             </View>
             <View style={styles.viewPassContainer}>
+                <CheckBox
+                    center
+                    checked={isSelected}
+                    onPress={() => setSelection(!isSelected)}>
+                </CheckBox>
                 <Text style={styles.viewPassText}>
                     Ver contraseña
                 </Text>
@@ -94,7 +98,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-around",
         alignItems: "center",
-        width: "70%",
+        width: "40%",
         paddingVertical: 50
     },
     viewPassText: {
