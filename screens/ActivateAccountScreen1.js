@@ -1,15 +1,52 @@
-import React, { useState } from 'react'
-import { View, Text, Button, StyleSheet, TextInput, Image } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import React, { useState, useEffect } from 'react'
+import { View, Text, StyleSheet, TextInput, Image } from 'react-native'
 import NewButton from '../components/buttons'
 import userIcon from '../assets/user.png'
 import look1Icon from '../assets/look1.png'
 import look2Icon from '../assets/look2.png'
 import { CheckBox } from 'react-native-elements'
 
-const ActivateAccountScreen1 = () => {
+import { login } from '../api/students'
+
+const ActivateAccountScreen1 = ({ navigation, route }) => {
+
+    const [student, setStudent] = useState({
+        _id: '',
+        university_code: '',
+        password: '',
+        newPassword1: '',
+        newPassword2: ''
+    })
 
     const [isSelected, setSelection] = useState(false)
+
+    const handleChange = (name, value) => setStudent({ ...student, [name]: value })
+
+    const handleSubmit = async () => {
+        const res = await login(student)
+        // correct credentials
+        if (res.ok) {
+            // same passwords
+            if (student.newPassword1 == student.newPassword2) {
+                student._id = res.student._id
+                navigation.navigate("ActivateAccountScreen2", {
+                    student: student
+                })
+            } else {
+                //<MODAL> Las contraseñas no coinciden
+                console.log("Las contraseñas no coinciden")
+            }
+        } else {
+            if (!res.correctPassword) // <MODAL> Contraseña incorrecta
+                console.log("Contraseña incorrecta")
+        }
+    }
+
+    useEffect(() => {
+        if (route.params && route.params.student) {
+            student.university_code = route.params.student.university_code
+        }
+    }, [])
 
     return (
         <View style={styles.container}>
@@ -19,7 +56,9 @@ const ActivateAccountScreen1 = () => {
             <View style={styles.inputTextContainer}>
                 <TextInput
                     style={styles.inputText}
-                    placeholder='Código Universitario'>
+                    placeholder='Código Universitario'
+                    value={route.params.student.university_code}
+                >
                 </TextInput>
                 <Image
                     style={styles.icons}
@@ -29,7 +68,9 @@ const ActivateAccountScreen1 = () => {
             <View style={styles.inputTextContainer}>
                 <TextInput
                     style={styles.inputText}
-                    placeholder='Contraseña de correo institucional'>
+                    placeholder='Contraseña de correo institucional'
+                    onChangeText={(value) => handleChange('password', value)}
+                    value={student.password}>
                 </TextInput>
                 <Image
                     style={styles.icons}
@@ -39,7 +80,9 @@ const ActivateAccountScreen1 = () => {
             <View style={styles.inputTextContainer}>
                 <TextInput
                     style={styles.inputText}
-                    placeholder='Introducir nueva contraseña'>
+                    placeholder='Introducir nueva contraseña'
+                    onChangeText={(value) => handleChange('newPassword1', value)}
+                    value={student.newPassword1}>
                 </TextInput>
                 <Image
                     style={styles.icons}
@@ -49,7 +92,9 @@ const ActivateAccountScreen1 = () => {
             <View style={styles.inputTextContainer}>
                 <TextInput
                     style={styles.inputText}
-                    placeholder='Confirmar nueva contraseña'>
+                    placeholder='Confirmar nueva contraseña'
+                    onChangeText={(value) => handleChange('newPassword2', value)}
+                    value={student.newPassword2}>
                 </TextInput>
                 <Image
                     style={styles.icons}
@@ -73,6 +118,7 @@ const ActivateAccountScreen1 = () => {
                 content_="SIGUIENTE"
                 width_="100%"
                 link_="ActivateAccountScreen2"
+                onPress={handleSubmit}
             />
         </View>
     )

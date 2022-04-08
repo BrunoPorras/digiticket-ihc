@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, Button, StyleSheet, TextInput, Image } from 'react-native'
 import { ListItem } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
@@ -7,13 +7,19 @@ import NewButton from '../components/buttons'
 import mailIcon from '../assets/mail.png'
 import phoneIcon from '../assets/phone.png'
 
+import { updateStudent } from '../api/students'
+
 const log = () => console.log('this is an example method');
 
-const ActivateAccountScreen2 = () => {
-    const navigation = useNavigation()
-    const handleNext = () => {
-        navigation.navigate("ActivatedAccountScreen")
-    }
+const ActivateAccountScreen2 = ({ navigation, route }) => {
+
+    const [student, setStudent] = useState({
+        password: '',
+        personal_mail: '',
+        personal_phone: '',
+        preference_campus: '',
+        activated_account: false
+    })
 
     const sedes = [{
         name: "Cangallo"
@@ -21,9 +27,31 @@ const ActivateAccountScreen2 = () => {
         name: "Ciudad universitaria"
     }]
 
+    const handleNext = () => {
+        navigation.navigate("ActivatedAccountScreen")
+    }
+
     const [sede, setSede] = useState("Sede de preferencia")
 
     const [expanded, setExpanded] = useState(false)
+
+    const handleChange = (name, value) => setStudent({ ...student, [name]: value })
+
+    const handleSubmit = async () => {
+        student.preference_campus = sede
+        student.activated_account = true
+        const res = await updateStudent(route.params.student._id,student)
+        if (res.ok) {
+            //<MODAL> Cuenta activada exitosamente
+            console.log("Logged in")
+        }
+    }
+
+    useEffect(() => {
+        if (route.params && route.params.student) {
+            student.password = route.params.student.newPassword1
+        }
+    }, [])
 
     return (
         <View style={styles.container}>
@@ -32,7 +60,9 @@ const ActivateAccountScreen2 = () => {
             </Text>
             <View style={styles.inputTextContainer}>
                 <TextInput
-                    placeholder='Correo personal'>
+                    placeholder='Correo personal'
+                    onChangeText={(value) => handleChange('personal_mail', value)}
+                    value={student.personal_mail}>
                 </TextInput>
                 <Image
                     style={styles.icons_mail}
@@ -41,7 +71,9 @@ const ActivateAccountScreen2 = () => {
             </View>
             <View style={styles.inputTextContainer}>
                 <TextInput
-                    placeholder='Teléfono'>
+                    placeholder='Teléfono'
+                    onChangeText={(value) => handleChange('personal_phone', value)}
+                    value={student.personal_phone}>                    
                 </TextInput>
                 <Image
                     style={styles.icons_phone}
@@ -65,8 +97,8 @@ const ActivateAccountScreen2 = () => {
                         setExpanded(!expanded);
                     }}>
                     {sedes.map((sede) => (
-                        <ListItem key={sede.name} onPress={(e)=> setSede(sede.name)}
-                        containerStyle={styles.listItems}>
+                        <ListItem key={sede.name} onPress={(e) => setSede(sede.name)}
+                            containerStyle={styles.listItems}>
                             <ListItem.Content>
                                 <ListItem.Title>{sede.name}</ListItem.Title>
                             </ListItem.Content>
@@ -78,6 +110,7 @@ const ActivateAccountScreen2 = () => {
                 width_="100%"
                 content_="GUARDAR DATOS"
                 link_="ActivatedAccountScreen"
+                onPress={handleSubmit}
             />
         </View>
     )

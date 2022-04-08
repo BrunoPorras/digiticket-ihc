@@ -4,11 +4,11 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
 const NewButton = (props) => {
 
-    const { width_, content_, link_ } = props;
+    const { width_, content_, link_, onPress} = props;
 
     const navigation = useNavigation()
     const handleSubmit = () => {
-        navigation.navigate(link_)
+        onPress()
     }
 
     return (

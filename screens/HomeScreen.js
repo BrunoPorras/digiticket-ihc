@@ -1,14 +1,38 @@
 import React, { useState } from 'react'
-import { View, Text, Button, StyleSheet, TextInput, Image } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Image } from 'react-native'
 
-import { Icon, Input, CheckBox } from 'react-native-elements'
+import { CheckBox } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
+import { validateActivation } from '../api/students'
 
 import NewButton from '../components/buttons'
 import userIcon from '../assets/user.png'
 
-const HomeScreen = () => {
+const HomeScreen = (props) => {
+    
+    const [student, setStudent] = useState({
+        university_code: ''
+    })
+
     const [isSelected, setSelection] = useState(false)
+
+    const navigation = useNavigation()
+
+    const handleChange = (name, value) => setStudent({ student, [name]: value })
+    
+    const handleActivation = async () => {
+        const res = await validateActivation(student)
+        if (res.ok) {
+            res.activated ?
+            navigation.navigate("ActivatedAccountScreen",{
+                student: student
+            }) :
+            // <MODAL> Active su cuenta por favor
+            navigation.navigate("ActivateAccountScreen1",{
+                student: student
+            })
+        }
+    }
 
     return (
         <View style={styles.container}>
@@ -17,7 +41,9 @@ const HomeScreen = () => {
             </View>
             <View style={styles.inputContainer}>
                 <TextInput style={styles.inputCodigo}
-                    placeholder='Código Universitario'>
+                    placeholder='Código Universitario'
+                    onChangeText={(value) => handleChange('university_code', value)}
+                    value={student.university_code}>
                 </TextInput>
                 <Image
                     style={styles.icons}
@@ -37,7 +63,8 @@ const HomeScreen = () => {
             <NewButton
                 width_="60%"
                 content_="SIGUIENTE"
-                link_="ActivateAccountScreen1"
+                link_=""
+                onPress={handleActivation}
             />
             <View style={styles.notAccountContainer}>
                 <Text style={styles.notAccountText}>

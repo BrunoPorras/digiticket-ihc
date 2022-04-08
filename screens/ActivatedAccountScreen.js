@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, Button, StyleSheet, TextInput, Image } from 'react-native'
 import { Icon, Input, CheckBox } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
@@ -6,9 +6,18 @@ import { useNavigation } from '@react-navigation/native'
 import lookIcon from '../assets/look1.png'
 import NewButton from '../components/buttons'
 
-const ActivatedAccountScreen = () => {
+import { login } from '../api/students'
+
+const ActivatedAccountScreen = ({ navigation, route }) => {
+
+    const [student, setStudent] = useState({
+        _id: '',
+        university_code: '',
+        password: '',
+    })
     const [isSelected, setSelection] = useState(false)
-    const navigation = useNavigation()
+
+    const handleChange = (name, value) => setStudent({ ...student, [name]: value })
 
     const handleRecoverPassword = () => {
         navigation.navigate("RecoverPasswordScreen")
@@ -18,6 +27,23 @@ const ActivatedAccountScreen = () => {
         navigation.navigate("HomeScreen")
     }
 
+    const handleSubmit = async () => {
+        const res = await login(student)
+        // correct credentials
+        if (res.ok) {
+            student._id = res.student._id
+            console.log("Logged in")
+        } else {
+            console.log("Contraseña incorrecta")
+        }
+    }
+
+    useEffect(() => {
+        if (route.params && route.params.student) {
+            student.university_code = route.params.student.university_code
+        }
+    }, [])
+
     return (
         <View style={styles.container}>
             <Text style={styles.tittle}>
@@ -26,7 +52,9 @@ const ActivatedAccountScreen = () => {
             <View style={styles.inputContainer}>
                 <TextInput
                     style={styles.inputCodigo}
-                    placeholder='Constraseña'>
+                    placeholder='Constraseña'
+                    onChangeText={(value) => handleChange('password', value)}
+                    value={student.password}>
                 </TextInput>
                 <Image
                     style={styles.icons}
@@ -47,6 +75,7 @@ const ActivatedAccountScreen = () => {
                 width_={"60%"}
                 content_={"INGRESAR"}
                 link_={"GA"}
+                onPress={handleSubmit}
             />
             <Text
                 style={styles.forgotPassText}
