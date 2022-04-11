@@ -31,8 +31,10 @@ const ActivatedAccountScreen = ({ navigation, route }) => {
         const res = await login(student)
         // correct credentials
         if (res.ok) {
-            student._id = res.student._id
             console.log("Logged in")
+            navigation.navigate("LandingPageScreen", {
+                student: res.student
+            })            
         } else {
             console.log("Contraseña incorrecta")
         }

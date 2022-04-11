@@ -27,10 +27,6 @@ const ActivateAccountScreen2 = ({ navigation, route }) => {
         name: "Ciudad universitaria"
     }]
 
-    const handleNext = () => {
-        navigation.navigate("ActivatedAccountScreen")
-    }
-
     const [sede, setSede] = useState("Sede de preferencia")
 
     const [expanded, setExpanded] = useState(false)
@@ -44,6 +40,9 @@ const ActivateAccountScreen2 = ({ navigation, route }) => {
         if (res.ok) {
             //<MODAL> Cuenta activada exitosamente
             console.log("Logged in")
+            navigation.navigate("LandingPageScreen", {
+                student: res.student
+            })            
         }
     }
 

@@ -5,6 +5,11 @@ export const getStudents = async () => {
     return await res.json()
 }
 
+export const getStudent = async (id) => {
+    const res = await fetch(`${API}/${id}`)
+    return await res.json()
+}
+
 export const validateActivation = async (student) => {
     const res = await fetch(`${API}/validateActivation/${student.university_code}`)
     return await res.json()

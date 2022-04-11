@@ -12,6 +12,11 @@ import ActivateAccountScreen2 from './screens/ActivateAccountScreen2'
 import ActivatedAccountScreen from './screens/ActivatedAccountScreen'
 import RecoverPasswordScreen from './screens/RecoverPasswordScreen'
 import ChangePasswordScreen from './screens/ChangePasswordScreen'
+import LandingPageScreen from './screens/LandingPageScreen'
+import Reserve01 from './components/Reserve01'
+import Reserve02 from './components/Reserve02'
+import Reserve03 from './components/Reserve03'
+import Reserve04 from './components/Reserve04'
 
 function MyStack() {
   return (
@@ -27,6 +32,16 @@ function MyStack() {
       <Stack.Screen name="RecoverPasswordScreen" component={RecoverPasswordScreen} options={{title: "Recover Password"}}>
       </Stack.Screen>
       <Stack.Screen name="ChangePasswordScreen" component={ChangePasswordScreen} options={{title: "Change Password"}}>
+      </Stack.Screen>
+      <Stack.Screen name="LandingPageScreen" component={LandingPageScreen} options={{title: "Landing Page"}}>
+      </Stack.Screen>
+      <Stack.Screen name="Reserve01" component={Reserve01} options={{title: "Reserve01"}}>
+      </Stack.Screen>
+      <Stack.Screen name="Reserve02" component={Reserve02} options={{title: "Reserve02"}}>
+      </Stack.Screen>
+      <Stack.Screen name="Reserve03" component={Reserve03} options={{title: "Reserve03"}}>
+      </Stack.Screen>
+      <Stack.Screen name="Reserve04" component={Reserve04} options={{title: "Reserve04"}}>
       </Stack.Screen>
     </Stack.Navigator>
   )
