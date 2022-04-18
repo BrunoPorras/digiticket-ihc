@@ -4,17 +4,13 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
 const NewButton = (props) => {
 
-    const { width_, content_, link_, onPress} = props;
+    const { width_, content_, onPress, color_} = props;
 
-    const navigation = useNavigation()
-    const handleSubmit = () => {
-        onPress()
-    }
 
     return (
         <TouchableOpacity
-            style = {{...styles.button, width: width_}}
-            onPress = {handleSubmit}
+            style = {{...styles.button, width: width_, backgroundColor: color_}}
+            onPress = {onPress}
         >
             <Text style={styles.buttonText}>
                 {content_}
@@ -26,8 +22,6 @@ const NewButton = (props) => {
 const styles = StyleSheet.create({
     button: {
         alignSelf: "center",
-        backgroundColor: "#136CF1",
-        width: "60%",
         paddingVertical: 10,
         borderRadius: 15
     },

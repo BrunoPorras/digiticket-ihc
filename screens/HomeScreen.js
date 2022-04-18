@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { View, Text, StyleSheet, TextInput, Image } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, Text, StyleSheet, TextInput, Image, Modal } from 'react-native'
 
 import { CheckBox } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
@@ -9,7 +9,9 @@ import NewButton from '../components/buttons'
 import userIcon from '../assets/user.png'
 
 const HomeScreen = (props) => {
-    
+
+    const [modalView, setModalView] = useState(false)
+
     const [student, setStudent] = useState({
         university_code: ''
     })
@@ -19,23 +21,47 @@ const HomeScreen = (props) => {
     const navigation = useNavigation()
 
     const handleChange = (name, value) => setStudent({ student, [name]: value })
-    
+
     const handleActivation = async () => {
         const res = await validateActivation(student)
         if (res.ok) {
-            res.activated ?
-            navigation.navigate("ActivatedAccountScreen",{
-                student: student
-            }) :
-            // <MODAL> Active su cuenta por favor
-            navigation.navigate("ActivateAccountScreen1",{
-                student: student
-            })
+            if (res.activated) {
+                navigation.navigate("ActivatedAccountScreen", {
+                    student: student
+                })
+            } else {
+                navigation.navigate("ActivateAccountScreen1", {
+                    student: student
+                })
+            }
+        } else {
+            setModalView(true)
+            console.log("MODAL HOME: ", modalView)
         }
     }
 
+
     return (
         <View style={styles.container}>
+            <Modal
+                animationType="fade"
+                transparent
+                visible={modalView}
+            >
+                <View style={styles.containerModalBig}>
+                    <View style={styles.modalContainer}>
+                        <Text style={styles.textModal}>Usuario no encontrado, active su cuenta por favor</Text>
+                        <NewButton
+                            content_="Aceptar"
+                            width_="40%"
+                            color_="#FFA41D"
+                            onPress={() => {
+                                setModalView(false)
+                            }}
+                        />
+                    </View>
+                </View>
+            </Modal>
             <View style={styles.tittleContainer}>
                 <Text style={styles.tittle}>INICIAR SESIÓN</Text>
             </View>
@@ -61,9 +87,9 @@ const HomeScreen = (props) => {
                 </Text>
             </View>
             <NewButton
-                width_="60%"
                 content_="SIGUIENTE"
-                link_=""
+                width_="60%"
+                color_="#136CF1"
                 onPress={handleActivation}
             />
             <View style={styles.notAccountContainer}>
@@ -129,6 +155,26 @@ const styles = StyleSheet.create({
     icons: {
         height: 25,
         width: 20
+    },
+    containerModalBig: {
+        width: "100%",
+        height: "100%",
+        backgroundColor: "rgba(0, 0, 0, 0.7)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    modalContainer: {
+        width: "90%",
+        backgroundColor: "#fff",
+        borderRadius: 10,
+        padding: 40
+    },
+    textModal: {
+        color: "#136CF1",
+        fontSize: 18,
+        textAlign: "center",
+        marginBottom: 20
     }
 })
 

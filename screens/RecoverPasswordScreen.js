@@ -38,9 +38,10 @@ const RecoverPasswordScreen = () => {
                 </Image>
             </View>
             <NewButton
-                width_={"70%"}
-                content_={"SIGUIENTE"}
-                link_={"ChangePasswordScreen"}
+                content_="SIGUIENTE"
+                width_="70%"
+                color_="#136CF1"
+                onPress={handleValidateCode}
             />
             <View style={styles.sendMailContainer}>
                 <Image

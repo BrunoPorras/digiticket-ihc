@@ -9,6 +9,11 @@ const ChangePasswordScreen = () => {
 
     const [isSelected, setSelection] = useState(false)
 
+    const navigation = useNavigation()
+    const handleValidateCode = () => {
+        navigation.navigate('HomeScreen')
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.tittle}>
@@ -20,6 +25,7 @@ const ChangePasswordScreen = () => {
             <View style={styles.inputContainer}>
                 <TextInput
                     style={styles.inputPass}
+                    secureTextEntry={!isSelected}
                     placeholder='Contraseña nueva'>
                 </TextInput>
                 <Image
@@ -30,6 +36,7 @@ const ChangePasswordScreen = () => {
             <View style={styles.inputContainer}>
                 <TextInput
                     style={styles.inputPass}
+                    secureTextEntry={!isSelected}
                     placeholder='Confirmación'>
                 </TextInput>
                 <Image
@@ -51,9 +58,10 @@ const ChangePasswordScreen = () => {
                 </Text>
             </View>
             <NewButton
-                width_={"70%"}
-                content_={"GUARDAR CONTRASEÑA"}
-                link_={"HomeScreen"}
+                content_="GUARDAR CONTRASEÑA"
+                width_="70%"
+                color_="#136CF1"
+                onPress={handleValidateCode}
             />
         </View>
     )

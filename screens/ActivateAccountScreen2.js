@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Button, StyleSheet, TextInput, Image } from 'react-native'
+import { View, Text, Button, StyleSheet, TextInput, Image, Modal } from 'react-native'
 import { ListItem } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
 import NewButton from '../components/buttons'
@@ -12,6 +12,18 @@ import { updateStudent } from '../api/students'
 const log = () => console.log('this is an example method');
 
 const ActivateAccountScreen2 = ({ navigation, route }) => {
+
+    const [viewModal, setViewModal] = useState(false)
+
+    const [response, setResponse] = useState({})
+
+    const handleModal = () => {
+        setViewModal(false)
+        console.log("Logged in")
+        navigation.navigate("LandingPageScreen", {
+            student: response.student
+        })
+    }
 
     const [student, setStudent] = useState({
         password: '',
@@ -38,11 +50,8 @@ const ActivateAccountScreen2 = ({ navigation, route }) => {
         student.activated_account = true
         const res = await updateStudent(route.params.student._id,student)
         if (res.ok) {
-            //<MODAL> Cuenta activada exitosamente
-            console.log("Logged in")
-            navigation.navigate("LandingPageScreen", {
-                student: res.student
-            })            
+            setResponse(res)
+            setViewModal(true)
         }
     }
 
@@ -54,6 +63,25 @@ const ActivateAccountScreen2 = ({ navigation, route }) => {
 
     return (
         <View style={styles.container}>
+            <Modal
+                animationType="fade"
+                transparent
+                visible={viewModal}
+            >
+                <View style={styles.containerModalBig}>
+                    <View style={styles.modalContainer}>
+                        <Text style={styles.textModal}>Cuenta activada exitosamente</Text>
+                        <NewButton
+                            content_="Aceptar"
+                            width_="40%"
+                            color_="#FFA41D"
+                            onPress={() => {
+                                handleModal()
+                            }}
+                        />
+                    </View>
+                </View>
+            </Modal>
             <Text style={styles.tittle}>
                 Registre sus datos
             </Text>
@@ -106,8 +134,9 @@ const ActivateAccountScreen2 = ({ navigation, route }) => {
                 </ListItem.Accordion>
             </View>
             <NewButton
-                width_="100%"
                 content_="GUARDAR DATOS"
+                width_="100%"
+                color_="#136CF1"
                 link_="ActivatedAccountScreen"
                 onPress={handleSubmit}
             />
@@ -163,6 +192,27 @@ const styles = StyleSheet.create({
         borderBottomColor: "#B2B2B2",
         borderBottomWidth: .5
     },
+    containerModalBig: {
+        width: "100%",
+        height: "100%",
+        backgroundColor: "rgba(0, 0, 0, 0.7)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    modalContainer: {
+        width: "90%",
+        backgroundColor: "#fff",
+        borderRadius: 10,
+        padding: 40
+    },
+    textModal: {
+        color: "#136CF1",
+        fontSize: 18,
+        textAlign: "center",
+        marginHorizontal: 40,
+        marginBottom: 20
+    }
 });
 
 export default ActivateAccountScreen2

@@ -54,6 +54,7 @@ const ActivatedAccountScreen = ({ navigation, route }) => {
             <View style={styles.inputContainer}>
                 <TextInput
                     style={styles.inputCodigo}
+                    secureTextEntry={!isSelected}
                     placeholder='Constraseña'
                     onChangeText={(value) => handleChange('password', value)}
                     value={student.password}>
@@ -74,9 +75,9 @@ const ActivatedAccountScreen = ({ navigation, route }) => {
                 </Text>
             </View>
             <NewButton
-                width_={"60%"}
-                content_={"INGRESAR"}
-                link_={"GA"}
+                content_="INGRESAR"
+                width_="60%"
+                color_="#136CF1"
                 onPress={handleSubmit}
             />
             <Text

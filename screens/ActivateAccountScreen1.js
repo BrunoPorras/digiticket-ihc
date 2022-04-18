@@ -1,14 +1,29 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, TextInput, Image } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Image, Modal, TouchableOpacity, BackHandler } from 'react-native'
 import NewButton from '../components/buttons'
 import userIcon from '../assets/user.png'
 import look1Icon from '../assets/look1.png'
 import look2Icon from '../assets/look2.png'
-import { CheckBox } from 'react-native-elements'
+import { CheckBox, Input } from 'react-native-elements'
 
 import { login } from '../api/students'
 
 const ActivateAccountScreen1 = ({ navigation, route }) => {
+
+    const [modalView, setModalView] = useState(false)
+    
+    const handleGoBack = () => {
+        navigation.navigate("HomeScreen")
+    }
+    
+    const handleContinue = () => {
+        setModalView(false)
+    }
+
+    const backHandlerF = () => {
+        setModalView(true)
+        return true
+    }
 
     const [student, setStudent] = useState({
         _id: '',
@@ -41,15 +56,41 @@ const ActivateAccountScreen1 = ({ navigation, route }) => {
                 console.log("Contraseña incorrecta")
         }
     }
+    const backHandler = BackHandler.addEventListener("hardwareBackPress", backHandlerF)
 
     useEffect(() => {
         if (route.params && route.params.student) {
             student.university_code = route.params.student.university_code
         }
+        
     }, [])
 
     return (
         <View style={styles.container}>
+            <Modal
+                animationType="fade"
+                transparent
+                visible={modalView}
+            >
+                <View style={styles.containerModalBig}>
+                    <View style={styles.modalContainer}>
+                        <Text style={styles.textModal}>
+                            Cancelar registro
+                        </Text>
+                        <Text style={styles.textModal}>
+                            ¿Desea salir del proceso de registro?
+                        </Text>
+                        <View style={styles.modalOptionsContainer}>
+                            <TouchableOpacity onPress={handleContinue}>
+                                <Text style={styles.modalOptionNo}>NO, REGRESAR</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={handleGoBack}>
+                                <Text style={styles.modalOptionYes}>SÍ, SALIR</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
             <Text style={styles.tittle}>
                 Cambie su contraseña para una mayor seguridad
             </Text>
@@ -68,6 +109,7 @@ const ActivateAccountScreen1 = ({ navigation, route }) => {
             <View style={styles.inputTextContainer}>
                 <TextInput
                     style={styles.inputText}
+                    secureTextEntry={!isSelected}
                     placeholder='Contraseña de correo institucional'
                     onChangeText={(value) => handleChange('password', value)}
                     value={student.password}>
@@ -80,6 +122,7 @@ const ActivateAccountScreen1 = ({ navigation, route }) => {
             <View style={styles.inputTextContainer}>
                 <TextInput
                     style={styles.inputText}
+                    secureTextEntry={!isSelected}
                     placeholder='Introducir nueva contraseña'
                     onChangeText={(value) => handleChange('newPassword1', value)}
                     value={student.newPassword1}>
@@ -92,6 +135,7 @@ const ActivateAccountScreen1 = ({ navigation, route }) => {
             <View style={styles.inputTextContainer}>
                 <TextInput
                     style={styles.inputText}
+                    secureTextEntry={!isSelected}
                     placeholder='Confirmar nueva contraseña'
                     onChangeText={(value) => handleChange('newPassword2', value)}
                     value={student.newPassword2}>
@@ -117,7 +161,7 @@ const ActivateAccountScreen1 = ({ navigation, route }) => {
             <NewButton
                 content_="SIGUIENTE"
                 width_="100%"
-                link_="ActivateAccountScreen2"
+                color_="#136CF1"
                 onPress={handleSubmit}
             />
         </View>
@@ -168,6 +212,41 @@ const styles = StyleSheet.create({
     icons: {
         width: 20,
         height: 25
+    },
+    containerModalBig: {
+        width: "100%",
+        height: "100%",
+        backgroundColor: "rgba(0, 0, 0, 0.7)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    modalContainer: {
+        width: "90%",
+        backgroundColor: "#fff",
+        borderRadius: 10,
+        padding: 20
+    },
+    textModal: {
+        color: "#000",
+        fontSize: 18,
+        marginBottom: 20
+    },
+    modalOptionsContainer: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-around"
+    },
+    modalOptionNo: {
+        color: "#136CF1",
+        fontWeight: "bold",
+        marginVertical: 15
+    },
+    modalOptionYes: {
+        color: "#FF0000",
+        fontWeight: "bold",
+        marginVertical: 15
     }
 });
 
