@@ -90,6 +90,7 @@ const HomeScreen = (props) => {
                 content_="SIGUIENTE"
                 width_="60%"
                 color_="#136CF1"
+                colorText="#FFF"
                 onPress={handleActivation}
             />
             <View style={styles.notAccountContainer}>

@@ -9,19 +9,22 @@ const Reserve01 = ({ navigation, route }) => {
 
     return (
         <View>
-            <Text>Seleccione sede del comedor</Text>
+
+            <Text style={styles.tittle}>Seleccione sede del comedor</Text>
             <NewButton
-                width_="60%"
                 content_="SEDE CIUDAD UNIVERSITARIA"
-                link_=""
+                width_="60%"
+                colorText="#000"
+                extraStyle_={styles.bigBtn}
                 onPress={() => navigation.navigate("Reserve02", {
                     student: route.params.student, sede: "CIUDAD UNIVERSITARIA"
                 })}
             />
             <NewButton
+                content_="SEDE CANGALLO" 
                 width_="60%"
-                content_="SEDE CANGALLO"
-                link_=""
+                colorText="#000"
+                extraStyle_={styles.bigBtn}
                 onPress={() => navigation.navigate("Reserve02", {
                     student: route.params.student, sede: "CANGALLO"
                 })}
@@ -29,4 +32,26 @@ const Reserve01 = ({ navigation, route }) => {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    tittle: {
+        marginVertical: 40,
+        alignSelf: "center",
+        color: "#000",
+        fontWeight: "bold",
+        fontSize: 18
+    },
+    bigBtn: {
+        borderRadius: 20,
+        borderWidth: 2,
+        borderColor: "#818CEC",
+        marginVertical: 15,
+        height: 150,
+        width: 200,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center"
+    }
+})
+
 export default Reserve01

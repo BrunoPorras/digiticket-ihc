@@ -4,15 +4,15 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
 const NewButton = (props) => {
 
-    const { width_, content_, onPress, color_} = props;
+    const { width_, content_, onPress, color_, extraStyle_, colorText} = props;
 
 
     return (
         <TouchableOpacity
-            style = {{...styles.button, width: width_, backgroundColor: color_}}
+            style = {{...styles.button, width: width_, backgroundColor: color_, ...extraStyle_}}
             onPress = {onPress}
         >
-            <Text style={styles.buttonText}>
+            <Text style={{...styles.buttonText, color: colorText}}>
                 {content_}
             </Text>
         </TouchableOpacity>
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         alignSelf: "center",
-        color: "#FFF",
+        textAlign: "center",
         fontSize: 15
     }
 });

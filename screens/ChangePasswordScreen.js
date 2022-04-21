@@ -61,6 +61,7 @@ const ChangePasswordScreen = () => {
                 content_="GUARDAR CONTRASEÑA"
                 width_="70%"
                 color_="#136CF1"
+                colorText="#FFF"
                 onPress={handleValidateCode}
             />
         </View>

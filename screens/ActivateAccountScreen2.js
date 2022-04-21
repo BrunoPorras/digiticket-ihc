@@ -137,6 +137,7 @@ const ActivateAccountScreen2 = ({ navigation, route }) => {
                 content_="GUARDAR DATOS"
                 width_="100%"
                 color_="#136CF1"
+                colorText="#FFF"
                 link_="ActivatedAccountScreen"
                 onPress={handleSubmit}
             />

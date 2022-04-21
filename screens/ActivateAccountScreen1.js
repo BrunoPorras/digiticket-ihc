@@ -162,6 +162,7 @@ const ActivateAccountScreen1 = ({ navigation, route }) => {
                 content_="SIGUIENTE"
                 width_="100%"
                 color_="#136CF1"
+                colorText="#FFF"
                 onPress={handleSubmit}
             />
         </View>

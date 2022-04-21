@@ -78,6 +78,7 @@ const ActivatedAccountScreen = ({ navigation, route }) => {
                 content_="INGRESAR"
                 width_="60%"
                 color_="#136CF1"
+                colorText="#FFF"
                 onPress={handleSubmit}
             />
             <Text

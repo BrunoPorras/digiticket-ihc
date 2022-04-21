@@ -41,6 +41,7 @@ const RecoverPasswordScreen = () => {
                 content_="SIGUIENTE"
                 width_="70%"
                 color_="#136CF1"
+                colorText="#FFF"
                 onPress={handleValidateCode}
             />
             <View style={styles.sendMailContainer}>
