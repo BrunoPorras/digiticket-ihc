@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { View, Text, Button, StyleSheet, TextInput, Image, Modal } from 'react-native'
 
 export const Ticket = () => {
   return (
-    <div>Ticket</div>
+    <Text>Ticket</Text>
   )
 }
 

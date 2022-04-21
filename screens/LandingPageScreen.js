@@ -7,6 +7,12 @@ import Home from '../components/Home'
 import R from '../components/R'
 import Ticket from '../components/Ticket'
 import Profile from '../components/Profile'
+import IconNav from '../components/IconNavigator'
+
+import HomeIcon from '../assets/icons-tab-nav/home.png'
+import ProfileIcon from '../assets/icons-tab-nav/profile.png'
+import ReserveIcon from '../assets/icons-tab-nav/reserve.png'
+import ViewIcon from '../assets/icons-tab-nav/view.png'
 
 const LandingPageScreen = ({ navigation, route }) => {
 
@@ -16,22 +22,54 @@ const LandingPageScreen = ({ navigation, route }) => {
     }, [])
 
     return (
-        <>
-            <Text>
-                HOLA
-            </Text>
-        </>
+        <Tab.Navigator
+            screenOptions={{
+                tabBarShowLabel: false,
+                tabBarStyle: {
+                    paddingBottom: 10,
+                    paddingTop: 5,
+                    height: 60
+                }
+            }}>
+            <Tab.Screen name="Inicio" component={Home} options={{
+                tabBarIcon: ({focused}) => (
+                    <IconNav
+                        Icon={HomeIcon}
+                        Name="Inicio"
+                        Focus={focused}
+                    />
+                )
+            }}/>
+            <Tab.Screen name="Reservar" component={R} initialParams={{ student: route.params.student }} options={{
+                tabBarIcon: ({focused}) => (
+                    <IconNav
+                        Icon={ReserveIcon}
+                        Name="Reservar"
+                        Focus={focused}
+                    />
+                )
+            }}/>
+            <Tab.Screen name="Ver" component={Ticket} options={{
+                tabBarIcon: ({focused}) => (
+                    <IconNav
+                        Icon={ViewIcon}
+                        Name="Ver"
+                        Focus={focused}
+                    />
+                )
+            }}/>
+            <Tab.Screen name="Mi perfil" component={Profile} options={{
+                tabBarIcon: ({focused}) => (
+                    <IconNav
+                        Icon={ProfileIcon}
+                        Name="Mi perfil"
+                        Focus={focused}
+                    />
+                )
+            }}/>
+        </Tab.Navigator>
         
     )
 }
 
 export default LandingPageScreen
-
-/*
-        <Tab.Navigator>
-            <Tab.Screen name="Home" component={Home} />
-            <Tab.Screen name="R" component={R} initialParams={{ student: route.params.student }} />
-            <Tab.Screen name="Ticket" component={Ticket} />
-            <Tab.Screen name="Profile" component={Profile} />
-        </Tab.Navigator>
-*/
