@@ -17,7 +17,7 @@ const IconNav = (props) => {
             />
             <Text
                 style={{
-                    color: Focus ? "#137CF1" : "#136CF1",
+                    color: Focus ? "#137CF1" : "#474747",
                     ...styles.text
                 }}>
                 {Name}

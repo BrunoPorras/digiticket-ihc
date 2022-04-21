@@ -24,6 +24,7 @@ const LandingPageScreen = ({ navigation, route }) => {
     return (
         <Tab.Navigator
             screenOptions={{
+                headerShown: false,
                 tabBarShowLabel: false,
                 tabBarStyle: {
                     paddingBottom: 10,
