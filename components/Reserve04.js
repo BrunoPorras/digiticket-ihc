@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, ActivityIndicator } from 'react-native'
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 import NewButton from '../components/buttons';
 import { getStudent } from '../api/students'
 import { reduceRations } from '../api/turns'
@@ -38,32 +38,79 @@ const Reserve04 = ({ navigation, route }) => {
 
     return (
         <View>
-            <Text>RESUMEN DE RESERVA</Text>
-            <Text>Nombres y apellidos</Text>
-            <Text>{route.params.student.first_name + " " + route.params.student.last_name}</Text>
+            <Text style={styles.tittle}>RESUMEN DE RESERVA</Text>
+            <Text style={styles.subtittle}>Nombres y apellidos</Text>
+            <Text style={styles.text}>{route.params.student.first_name + " " + route.params.student.last_name}</Text>
 
-            <Text>Código Universitario</Text>
-            <Text>{route.params.student.university_code}</Text>
+            <Text style={styles.subtittle}>Código Universitario</Text>
+            <Text style={styles.text}>{route.params.student.university_code}</Text>
 
-            <Text>Servicio</Text>
-            <Text>{route.params.service_type}</Text>
+            <Text style={styles.subtittle}>Servicio</Text>
+            <Text style={styles.text}>{route.params.service_type}</Text>
 
-            <Text>Sede</Text>
-            <Text>{route.params.sede}</Text>
+            <Text style={styles.subtittle}>Sede</Text>
+            <Text style={styles.text}>{route.params.sede}</Text>
 
-            <Text>Turno</Text>
-            <Text>{"Turno " + route.params.turn.turn_number + " / " + route.params.turn.schedule}</Text>
+            <Text style={styles.subtittle}>Turno</Text>
+            <Text style={styles.text}>{"Turno " + route.params.turn.turn_number + " / " + route.params.turn.schedule}</Text>
 
-            <Text>Consumirá</Text>
-            {/* Tú mismo eres mi king :3 */}
-
+            <Text style={styles.subtittle}>Consumirá</Text>
+            <Text style={styles.text}>Anthony cpp le wa poner iconos noma ga</Text>
+            
+            <View style={{height: 50}}/>
             <NewButton
-                width_="60%"
                 content_="RESERVAR"
-                link_=""
+                width_="60%"
+                color_="#136CF1"
+                colorText="#FFF"
                 onPress={handleSubmit}
             />
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    tittle: {
+        alignSelf: "center",
+        fontSize: 18,
+        fontWeight: "bold",
+        marginVertical: 20
+    },
+    subtittle: {
+        alignSelf: "center",
+        fontSize: 18,
+        fontWeight: "bold",
+        color: "#136CF1",
+        marginVertical: 5
+    },
+    text: {
+        alignSelf: "center",
+        fontSize: 18,
+        marginVertical: 5
+    },
+    levelContainer: { 
+        width: "65%",
+        alignSelf: "center",
+        flexDirection: "row", 
+        justifyContent: "space-evenly"
+    },
+    level: {
+        borderRadius: 5,
+        borderWidth: 1,
+        paddingVertical: 8,
+        paddingHorizontal: 30
+    },
+    levelText: {
+        fontSize: 14,
+        fontWeight: "bold"
+    },
+    selectContainer: {
+        width: "25%",
+        alignSelf: "center",
+        flexDirection: "row", 
+        justifyContent: "space-between",
+        alignItems: "center"
+    }
+})
+
 export default Reserve04

@@ -1,4 +1,4 @@
-const API = 'http://localhost:4000/api/tickets'
+const API = 'https://backend-digiticket.herokuapp.com/api/tickets'
 
 export const createTicket = async (ticket) => {
     const res = await fetch(API, {

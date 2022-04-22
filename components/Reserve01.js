@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, Image, Button } from 'react-native'
 import NewButton from '../components/buttons'
+import ProgressBar from './ProgressBar'
 
 const Reserve01 = ({ navigation, route }) => {
 
@@ -9,7 +10,9 @@ const Reserve01 = ({ navigation, route }) => {
 
     return (
         <View>
-
+            <View style={styles.barContainer}>
+                <ProgressBar step={0} steps={3} height={10}/>
+            </View>
             <Text style={styles.tittle}>Seleccione sede del comedor</Text>
             <NewButton
                 content_="SEDE CIUDAD UNIVERSITARIA"
@@ -35,7 +38,7 @@ const Reserve01 = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
     tittle: {
-        marginVertical: 40,
+        marginBottom: 40,
         alignSelf: "center",
         color: "#000",
         fontWeight: "bold",
@@ -51,6 +54,10 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center"
+    },
+    barContainer: {
+        marginVertical: 40,
+        marginHorizontal: 60
     }
 })
 
