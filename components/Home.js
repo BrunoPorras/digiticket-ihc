@@ -4,16 +4,110 @@ import { LinearGradient } from 'expo-linear-gradient'
 
 import eyeIcon from '../assets/icons-tab-nav/eye.png'
 import { CheckBox } from 'react-native-elements'
+import NewButton from './buttons'
 
 export const Home = () => {
 
+    const [modalView, setModalView] = useState(false)
+
+    const closeModal = () => {
+        setModalView(false)
+    }
+
+    const openModal = () => {
+        setModalView(true)
+        return true
+    }
+
     const [colors, setColors] = useState({
-        color1: "#FF7A00", 
-        color2: "#9D9D9D", 
+        color1: "#FF7A00",
+        color2: "#9D9D9D",
         color3: "#9D9D9D"
     })
 
-    const [foodFocus, setFoodFocus] = useState(1)
+    const [foodFocus, setFoodFocus] = useState(0)
+
+    //  Array of the menu
+    const foods = [
+        {
+            appetizer: {
+                name: "Avena con manzana",
+                proteins: "535 g",
+                carbohydrates: "190 g",
+                fats: "65 g"
+            },
+            main_dish: {
+                name: "Pan con lomo",
+                proteins: "535 g",
+                carbohydrates: "190 g",
+                fats: "65 g"
+            },
+            desert: {
+                name: "Pan con palta",
+                proteins: "535 g",
+                carbohydrates: "190 g",
+                fats: "65 g"
+            },
+            drink: {
+                name: "Jugo de naranja",
+                proteins: "535 g",
+                carbohydrates: "190 g",
+                fats: "0"
+            }
+        },
+        {
+            appetizer: {
+                name: "Sopa de fideos",
+                proteins: "535 g",
+                carbohydrates: "190 g",
+                fats: "65 g"
+            },
+            main_dish: {
+                name: "Arroz chaufa de pollo",
+                proteins: "535 g",
+                carbohydrates: "190 g",
+                fats: "65 g"
+            },
+            desert: {
+                name: "Manzana",
+                proteins: "535 g",
+                carbohydrates: "190 g",
+                fats: "65 g"
+            },
+            drink: {
+                name: "Agua de maracuyá",
+                proteins: "535 g",
+                carbohydrates: "190 g",
+                fats: "65 g"
+            }
+        },
+        {
+            appetizer: {
+                name: "Sopa de sémola",
+                proteins: "505 g",
+                carbohydrates: "100 g",
+                fats: "95 g"
+            },
+            main_dish: {
+                name: "Tallarín verde",
+                proteins: "295 g",
+                carbohydrates: "90 g",
+                fats: "75 g"
+            },
+            desert: {
+                name: "Naranja",
+                proteins: "535 g",
+                carbohydrates: "190 g",
+                fats: "65 g"
+            },
+            drink: {
+                name: "Agua de caño",
+                proteins: "0 g",
+                carbohydrates: "0 g",
+                fats: "0 g"
+            }
+        }
+    ]
 
     const breakfastSelect = () => {
         setColors({
@@ -21,6 +115,7 @@ export const Home = () => {
             color2: "#9D9D9D",
             color3: "#9D9D9D"
         })
+        setFoodFocus(0)
     }
 
     const lunchSelect = () => {
@@ -29,6 +124,7 @@ export const Home = () => {
             color2: "#FF7A00",
             color3: "#9D9D9D"
         })
+        setFoodFocus(1)
     }
 
     const dinnerSelect = () => {
@@ -37,9 +133,49 @@ export const Home = () => {
             color2: "#9D9D9D",
             color3: "#FF7A00"
         })
+        setFoodFocus(2)
     }
     return (
         <View style={{ backgroundColor: "#FFF", height: "100%" }}>
+            <Modal
+                animationType="fade"
+                transparent
+                visible={modalView}
+            >
+                <View style={styles.containerModalBig}>
+                    <View style={styles.modalContainer}>
+                        <Text style={styles.titleModal}>
+                            Platano
+                        </Text>
+                        <View style={styles.propertiesContainer}>
+                            <Text style={{
+                                fontWeight: "bold", ...styles.foodText
+                            }}>Proteínas:</Text>
+                            <Text style={styles.foodText}>{foods[foodFocus]["appetizer"]["proteins"]}</Text>
+                        </View>
+                        <View style={styles.propertiesContainer}>
+                            <Text style={{
+                                fontWeight: "bold", ...styles.foodText
+                            }}>Carbohidratos:</Text>
+                            <Text style={styles.foodText}>{foods[foodFocus]["appetizer"]["carbohydrates"]}</Text>
+                        </View>
+                        <View style={styles.propertiesContainer}>
+                            <Text style={{
+                                fontWeight: "bold", ...styles.foodText
+                            }}>Grasas:</Text>
+                            <Text style={styles.foodText}>{foods[foodFocus]["appetizer"]["fats"]}</Text>
+                        </View>
+                        <View style={{height: 20}}/>
+                        <NewButton
+                            content_="Aceptar"
+                            width_="40%"
+                            color_="#FFA41D"
+                            colorText="#FFF"
+                            onPress={closeModal}
+                        />
+                    </View>
+                </View>
+            </Modal>
             <LinearGradient start={{ x: 0, y: 0.5 }} end={{ x: 1, y: 0 }} colors={["#1A69DF", "#FF7A00"]} style={styles.tittleContainer}>
                 <Text style={styles.tittleStyler}>
                     BIENVENIDO A DIGITICKET OGBU
@@ -51,9 +187,9 @@ export const Home = () => {
             <View style={styles.timeContainer}>
                 <TouchableOpacity
                     onPress={breakfastSelect}
-                    >
+                >
                     <Text style={{
-                        color: colors.color1, 
+                        color: colors.color1,
                         borderBottomColor: colors.color1,
                         ...styles.tittleOptions
                     }}>Desayuno</Text>
@@ -61,7 +197,7 @@ export const Home = () => {
                 <TouchableOpacity
                     onPress={lunchSelect}>
                     <Text style={{
-                        color: colors.color2, 
+                        color: colors.color2,
                         borderBottomColor: colors.color2,
                         ...styles.tittleOptions
                     }}>Almuerzo</Text>
@@ -69,7 +205,7 @@ export const Home = () => {
                 <TouchableOpacity
                     onPress={dinnerSelect}>
                     <Text style={{
-                        color: colors.color3, 
+                        color: colors.color3,
                         borderBottomColor: colors.color3,
                         ...styles.tittleOptions
                     }}>Cena</Text>
@@ -80,37 +216,37 @@ export const Home = () => {
                 <View style={styles.foodOptionContainer}>
                     <Text style={{
                         fontWeight: "bold", ...styles.foodText
-                        }}>Entrada:</Text>
-                    <Text style={styles.foodText}>Sopa de fideos</Text>
-                    <TouchableOpacity>
-                        <Image source={eyeIcon} style={{width: 16, height: 12}}/>
+                    }}>Entrada:</Text>
+                    <Text style={styles.foodText}>{foods[foodFocus]["appetizer"]["name"]}</Text>
+                    <TouchableOpacity onPress={openModal}>
+                        <Image source={eyeIcon} style={{ width: 16, height: 12 }} />
                     </TouchableOpacity>
                 </View>
                 <View style={styles.foodOptionContainer}>
                     <Text style={{
                         fontWeight: "bold", ...styles.foodText
-                        }}>Segundo:</Text>
-                    <Text style={styles.foodText}>Arroz chaufa de pollo</Text>
-                    <TouchableOpacity>
-                        <Image source={eyeIcon} style={{width: 16, height: 12}}/>
+                    }}>Segundo:</Text>
+                    <Text style={styles.foodText}>{foods[foodFocus]["main_dish"]["name"]}</Text>
+                    <TouchableOpacity onPress={openModal}>
+                        <Image source={eyeIcon} style={{ width: 16, height: 12 }} />
                     </TouchableOpacity>
                 </View>
                 <View style={styles.foodOptionContainer}>
                     <Text style={{
                         fontWeight: "bold", ...styles.foodText
-                        }}>Postre:</Text>
-                    <Text style={styles.foodText}>Manzana</Text>
-                    <TouchableOpacity>
-                        <Image source={eyeIcon} style={{width: 16, height: 12}}/>
+                    }}>Postre:</Text>
+                    <Text style={styles.foodText}>{foods[foodFocus]["desert"]["name"]}</Text>
+                    <TouchableOpacity onPress={openModal}>
+                        <Image source={eyeIcon} style={{ width: 16, height: 12 }} />
                     </TouchableOpacity>
                 </View>
                 <View style={styles.foodOptionContainer}>
                     <Text style={{
                         fontWeight: "bold", ...styles.foodText
-                        }}>Bebida:</Text>
-                    <Text style={styles.foodText}>Agua de maracuyá</Text>
-                    <TouchableOpacity>
-                        <Image source={eyeIcon} style={{width: 16, height: 12}}/>
+                    }}>Bebida:</Text>
+                    <Text style={styles.foodText}>{foods[foodFocus]["drink"]["name"]}</Text>
+                    <TouchableOpacity onPress={openModal}>
+                        <Image source={eyeIcon} style={{ width: 16, height: 12 }} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -123,21 +259,21 @@ export const Home = () => {
                             <View style={styles.cardRow}>
                                 <CheckBox></CheckBox>
                                 <View>
-                                    <Text style={{fontWeight: "bold", ...styles.cardText}}>Desayuno:</Text>
+                                    <Text style={{ fontWeight: "bold", ...styles.cardText }}>Desayuno:</Text>
                                     <Text style={styles.cardText}>Desde las 7:00 am (sin ticket)</Text>
                                 </View>
                             </View>
                             <View style={styles.cardRow}>
                                 <CheckBox></CheckBox>
                                 <View>
-                                    <Text style={{fontWeight: "bold", ...styles.cardText}}>Almuerzo:</Text>
+                                    <Text style={{ fontWeight: "bold", ...styles.cardText }}>Almuerzo:</Text>
                                     <Text style={styles.cardText}>De 12:00 pm a 1:40 pm</Text>
                                 </View>
                             </View>
                             <View style={styles.cardRow}>
                                 <CheckBox></CheckBox>
                                 <View>
-                                    <Text style={{fontWeight: "bold", ...styles.cardText}}>Cena:</Text>
+                                    <Text style={{ fontWeight: "bold", ...styles.cardText }}>Cena:</Text>
                                     <Text style={styles.cardText}>De 5:00 pm a 6:00 pm</Text>
                                 </View>
                             </View>
@@ -147,14 +283,14 @@ export const Home = () => {
                             <View style={styles.cardRow}>
                                 <CheckBox></CheckBox>
                                 <View>
-                                    <Text style={{fontWeight: "bold", ...styles.cardText}}>Almuerzo:</Text>
+                                    <Text style={{ fontWeight: "bold", ...styles.cardText }}>Almuerzo:</Text>
                                     <Text style={styles.cardText}>Desde las 7:30 am</Text>
                                 </View>
                             </View>
                             <View style={styles.cardRow}>
                                 <CheckBox></CheckBox>
                                 <View>
-                                    <Text style={{fontWeight: "bold", ...styles.cardText}}>Cena:</Text>
+                                    <Text style={{ fontWeight: "bold", ...styles.cardText }}>Cena:</Text>
                                     <Text style={styles.cardText}>Desde las 2:30 pm</Text>
                                 </View>
                             </View>
@@ -239,6 +375,55 @@ const styles = StyleSheet.create({
     },
     cardText: {
         fontSize: 14
+    },
+    containerModalBig: {
+        width: "100%",
+        height: "100%",
+        backgroundColor: "rgba(0, 0, 0, 0.7)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    modalContainer: {
+        width: "90%",
+        backgroundColor: "#fff",
+        borderRadius: 10,
+        padding: 20
+    },
+    titleModal: {
+        alignSelf: "center",
+        color: "#136CF1",
+        fontSize: 20
+    },
+    textModal: {
+        color: "#000",
+        fontSize: 18,
+        marginBottom: 20
+    },
+    propertiesContainer: {
+        width: "60%",
+        alignSelf: "center",
+        marginVertical: 8,
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between"
+    },
+    modalOptionsContainer: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-around"
+    },
+    modalOptionNo: {
+        color: "#136CF1",
+        fontWeight: "bold",
+        marginVertical: 15
+    },
+    modalOptionYes: {
+        color: "#FF0000",
+        fontWeight: "bold",
+        marginVertical: 15
     }
 })
 
