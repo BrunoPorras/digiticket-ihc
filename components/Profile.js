@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity, Modal } from 'react-native'
 
 import cancelIcon from '../assets/icons-profile/cancel.png'
 import closeIcon from '../assets/icons-profile/close.png'
@@ -8,10 +8,10 @@ import dataIcon from '../assets/icons-profile/data.png'
 import historyIcon from '../assets/icons-profile/history.png'
 import scheduleIcon from '../assets/icons-profile/schedule.png'
 
-
-
-
 export const Profile = () => {
+
+    const [cancelTicket, setCancelTicket] = useState(false)
+
     return (
         <>
             <View style={styles.headerContainer}>

@@ -1,11 +1,32 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
+import { View, Text, ActivityIndicator, StyleSheet, Modal, TouchableOpacity } from 'react-native'
 import NewButton from '../components/buttons';
 import { getStudent } from '../api/students'
 import { reduceRations } from '../api/turns'
 import { createTicket } from '../api/tickets'
 
 const Reserve04 = ({ navigation, route }) => {
+
+    const [viewModal, setViewModal] = useState(false)
+    const [viewModal1, setViewModal1] = useState(false)
+
+    const closeModal = () => {
+        setViewModal(false)
+    }
+
+    const openModal = () => {
+        setViewModal(true)
+        return true
+    }
+
+    const closeModal1 = () => {
+        setViewModal1(false)
+    }
+
+    const openModal1 = () => {
+        setViewModal1(true)
+        return true
+    }
 
     const handleSubmit = async () => {
         const ticket = {
@@ -37,7 +58,54 @@ const Reserve04 = ({ navigation, route }) => {
     }, [])
 
     return (
+
         <View>
+            <Modal
+                animationType="fade"
+                transparent
+                visible={viewModal}
+            >
+                <View style={styles.containerModalBig}>
+                    <View style={styles.modalContainer}>
+                        <Text style={styles.textModal}>
+                            Confirme su reserva
+                        </Text>
+                        <View style={styles.modalOptionsContainer}>
+                            <TouchableOpacity onPress={closeModal}>
+                                <Text style={styles.modalOptionNo}>REGRESAR</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => {
+                                closeModal()
+                                openModal1()
+                            }}>
+                                <Text style={styles.modalOptionYes}>CONFIRMAR RESERVA</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
+            <Modal
+                animationType="fade"
+                transparent
+                visible={viewModal1}
+            >
+                <View style={styles.containerModalBig}>
+                    <View style={styles.modalContainer}>
+                        <Text style={styles.textModal1}>
+                            Reserva exitosa!
+                        </Text>
+                        <View style={styles.modalOptionsContainer}>
+                            <NewButton
+                                content_="Aceptar"
+                                width_="40%"
+                                color_="#FFA41D"
+                                colorText="#FFF"
+                                onPress={handleSubmit}
+                            />
+                        </View>
+                    </View>
+                </View>
+            </Modal>
             <Text style={styles.tittle}>RESUMEN DE RESERVA</Text>
             <Text style={styles.subtittle}>Nombres y apellidos</Text>
             <Text style={styles.text}>{route.params.student.first_name + " " + route.params.student.last_name}</Text>
@@ -56,14 +124,14 @@ const Reserve04 = ({ navigation, route }) => {
 
             <Text style={styles.subtittle}>Consumirá</Text>
             <Text style={styles.text}>Anthony cpp le wa poner iconos noma ga</Text>
-            
-            <View style={{height: 50}}/>
+
+            <View style={{ height: 50 }} />
             <NewButton
                 content_="RESERVAR"
                 width_="60%"
                 color_="#136CF1"
                 colorText="#FFF"
-                onPress={handleSubmit}
+                onPress={openModal}
             />
         </View>
     )
@@ -88,10 +156,10 @@ const styles = StyleSheet.create({
         fontSize: 18,
         marginVertical: 5
     },
-    levelContainer: { 
+    levelContainer: {
         width: "65%",
         alignSelf: "center",
-        flexDirection: "row", 
+        flexDirection: "row",
         justifyContent: "space-evenly"
     },
     level: {
@@ -107,9 +175,56 @@ const styles = StyleSheet.create({
     selectContainer: {
         width: "25%",
         alignSelf: "center",
-        flexDirection: "row", 
+        flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center"
+    },
+    containerModalBig: {
+        width: "100%",
+        height: "100%",
+        backgroundColor: "rgba(0, 0, 0, 0.7)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    modalContainer: {
+        width: "90%",
+        alignSelf: "center",
+        backgroundColor: "#fff",
+        borderRadius: 10,
+        padding: 20
+    },
+    textModal: {
+        alignSelf: "center",
+        color: "#000",
+        fontWeight: "bold",
+        fontSize: 18,
+        marginVertical: 20
+    },
+    textModal1: {
+        width: "30%",
+        alignSelf: "center",
+        textAlign: "center",
+        color: "#136CF1",
+        fontSize: 18,
+        fontWeight: "bold",
+        marginVertical: 20
+    },
+    modalOptionsContainer: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-around"
+    },
+    modalOptionNo: {
+        color: "#FFA41D",
+        fontWeight: "bold",
+        marginVertical: 15
+    },
+    modalOptionYes: {
+        color: "#136CF1",
+        fontWeight: "bold",
+        marginVertical: 15
     }
 })
 
