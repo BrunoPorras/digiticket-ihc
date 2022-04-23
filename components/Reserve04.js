@@ -123,7 +123,7 @@ const Reserve04 = ({ navigation, route }) => {
             <Text style={styles.text}>{"Turno " + route.params.turn.turn_number + " / " + route.params.turn.schedule}</Text>
 
             <Text style={styles.subtittle}>Consumirá</Text>
-            <Text style={styles.text}>Anthony cpp le wa poner iconos noma ga</Text>
+            <Text style={styles.text}>{route.params.service_type}</Text>
 
             <View style={{ height: 50 }} />
             <NewButton
