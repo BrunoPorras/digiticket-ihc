@@ -17,7 +17,7 @@ export const Profile = () => {
             <View style={styles.headerContainer}>
                 <View>
                     <Text style={styles.headerText}>Hola</Text>
-                    <Text style={{...styles.headerText, fontWeight: "bold"}}>CRISTHIAN</Text>
+                    <Text style={{...styles.headerText, fontWeight: "bold"}}>BRUNO</Text>
                 </View>
                 <Image source={cancelIcon}/>
             </View>

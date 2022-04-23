@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, ActivityIndicator, StyleSheet, Modal, TouchableOpacity } from 'react-native'
+import { View, Text, ActivityIndicator, StyleSheet, Modal, TouchableOpacity, Image } from 'react-native'
 import NewButton from '../components/buttons';
 import { getStudent } from '../api/students'
 import { reduceRations } from '../api/turns'
 import { createTicket } from '../api/tickets'
+
+import soupIcon from '../assets/icons-food/soup.png'
+import dishIcon from '../assets/icons-food/dish.png'
+import appleeIcon from '../assets/icons-food/apple.png'
+import drinkIcon from '../assets/icons-food/drink.png'
 
 export const Ticket = () => {
     return (
@@ -25,8 +30,13 @@ export const Ticket = () => {
             <Text style={styles.text}>Turno 1 / 12:00 - 12:20</Text>
 
             <Text style={styles.subtittle}>Consumirá</Text>
-            <Text style={styles.text}>Almuerzo</Text>
-            
+            <View style={styles.iconContainer}>
+                <Image source={soupIcon} style={styles.icon}/>
+                <Image source={dishIcon} style={styles.icon}/>
+                <Image source={appleeIcon} style={styles.icon}/>
+                <Image source={drinkIcon} style={styles.icon}/>
+            </View>
+
         </View>
     )
 }
@@ -119,6 +129,19 @@ const styles = StyleSheet.create({
         color: "#136CF1",
         fontWeight: "bold",
         marginVertical: 15
+    },
+    iconContainer:{
+        width: "40%",
+        display: "flex",
+        flexDirection: "row",
+        alignSelf: "center",
+        justifyContent: "space-around"
+    },
+    icon: {
+        width: 20,
+        height: 20,
+        resizeMode : 'contain',
+        marginHorizontal: 10
     }
 })
 

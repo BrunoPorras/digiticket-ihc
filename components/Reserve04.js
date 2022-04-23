@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, ActivityIndicator, StyleSheet, Modal, TouchableOpacity } from 'react-native'
+import { View, Text, ActivityIndicator, StyleSheet, Modal, TouchableOpacity, Image } from 'react-native'
 import NewButton from '../components/buttons';
 import { getStudent } from '../api/students'
 import { reduceRations } from '../api/turns'
 import { createTicket } from '../api/tickets'
+
+import soupIcon from '../assets/icons-food/soup.png'
+import dishIcon from '../assets/icons-food/dish.png'
+import appleeIcon from '../assets/icons-food/apple.png'
+import drinkIcon from '../assets/icons-food/drink.png'
 
 const Reserve04 = ({ navigation, route }) => {
 
@@ -123,7 +128,12 @@ const Reserve04 = ({ navigation, route }) => {
             <Text style={styles.text}>{"Turno " + route.params.turn.turn_number + " / " + route.params.turn.schedule}</Text>
 
             <Text style={styles.subtittle}>Consumirá</Text>
-            <Text style={styles.text}>{route.params.service_type}</Text>
+            <View style={styles.iconContainer}>
+                <Image source={soupIcon} style={styles.icon}/>
+                <Image source={dishIcon} style={styles.icon}/>
+                <Image source={appleeIcon} style={styles.icon}/>
+                <Image source={drinkIcon} style={styles.icon}/>
+            </View>
 
             <View style={{ height: 50 }} />
             <NewButton
@@ -225,6 +235,19 @@ const styles = StyleSheet.create({
         color: "#136CF1",
         fontWeight: "bold",
         marginVertical: 15
+    },
+    iconContainer:{
+        width: "40%",
+        display: "flex",
+        flexDirection: "row",
+        alignSelf: "center",
+        justifyContent: "space-around"
+    },
+    icon: {
+        width: 20,
+        height: 20,
+        resizeMode : 'contain',
+        marginHorizontal: 10
     }
 })
 
