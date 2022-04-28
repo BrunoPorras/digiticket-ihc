@@ -145,7 +145,7 @@ export const Home = () => {
                 <View style={styles.containerModalBig}>
                     <View style={styles.modalContainer}>
                         <Text style={styles.titleModal}>
-                            Platano
+                            Manzana
                         </Text>
                         <View style={styles.propertiesContainer}>
                             <Text style={{
