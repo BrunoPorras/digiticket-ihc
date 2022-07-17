@@ -1,6 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react'
-import { View, Text } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NavigationContainer } from '@react-navigation/native'
 
@@ -21,27 +19,27 @@ import Reserve04 from './components/Reserve04'
 function MyStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="HomeScreen" component={HomeScreen} options={{title: "Home"}}>
+      <Stack.Screen name="HomeScreen" component={HomeScreen} options={{title: ""}}>
       </Stack.Screen>
-      <Stack.Screen name="ActivateAccountScreen1" component={ActivateAccountScreen1} options={{title: "Change Password"}}>
+      <Stack.Screen name="ActivateAccountScreen1" component={ActivateAccountScreen1} options={{title: "Cambiar contraseña"}}>
       </Stack.Screen>
-      <Stack.Screen name="ActivateAccountScreen2" component={ActivateAccountScreen2} options={{title: "Personal Data"}}>
+      <Stack.Screen name="ActivateAccountScreen2" component={ActivateAccountScreen2} options={{title: "Datos personales"}}>
       </Stack.Screen>
-      <Stack.Screen name="ActivatedAccountScreen" component={ActivatedAccountScreen} options={{title: "Activated Account"}}>
+      <Stack.Screen name="ActivatedAccountScreen" component={ActivatedAccountScreen} options={{title: ""}}>
       </Stack.Screen>
-      <Stack.Screen name="RecoverPasswordScreen" component={RecoverPasswordScreen} options={{title: "Recover Password"}}>
+      <Stack.Screen name="RecoverPasswordScreen" component={RecoverPasswordScreen} options={{title: ""}}>
       </Stack.Screen>
-      <Stack.Screen name="ChangePasswordScreen" component={ChangePasswordScreen} options={{title: "Change Password"}}>
+      <Stack.Screen name="ChangePasswordScreen" component={ChangePasswordScreen} options={{title: ""}}>
       </Stack.Screen>
-      <Stack.Screen name="LandingPageScreen" component={LandingPageScreen} options={{title: "Landing Page"}}>
+      <Stack.Screen name="LandingPageScreen" component={LandingPageScreen} options={{title: ""}}>
       </Stack.Screen>
-      <Stack.Screen name="Reserve01" component={Reserve01} options={{title: "Reserve01"}}>
+      <Stack.Screen name="Reserve01" component={Reserve01} options={{title: ""}}>
       </Stack.Screen>
-      <Stack.Screen name="Reserve02" component={Reserve02} options={{title: "Reserve02"}}>
+      <Stack.Screen name="Reserve02" component={Reserve02} options={{title: ""}}>
       </Stack.Screen>
-      <Stack.Screen name="Reserve03" component={Reserve03} options={{title: "Reserve03"}}>
+      <Stack.Screen name="Reserve03" component={Reserve03} options={{title: ""}}>
       </Stack.Screen>
-      <Stack.Screen name="Reserve04" component={Reserve04} options={{title: "Reserve04"}}>
+      <Stack.Screen name="Reserve04" component={Reserve04} options={{title: ""}}>
       </Stack.Screen>
     </Stack.Navigator>
   )
