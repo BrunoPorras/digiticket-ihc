@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, Image, TouchableOpacity, Modal } from 'react-native'
+import React from 'react'
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 
+import profileIcon from '../assets/icons-profile/profile.png'
 import cancelIcon from '../assets/icons-profile/cancel.png'
 import closeIcon from '../assets/icons-profile/close.png'
 import commentsIcon from '../assets/icons-profile/comments.png'
@@ -10,16 +11,14 @@ import scheduleIcon from '../assets/icons-profile/schedule.png'
 
 export const Profile = () => {
 
-    const [cancelTicket, setCancelTicket] = useState(false)
-
     return (
         <>
             <View style={styles.headerContainer}>
                 <View>
                     <Text style={styles.headerText}>Hola</Text>
-                    <Text style={{...styles.headerText, fontWeight: "bold"}}>BRUNO</Text>
+                    <Text style={{...styles.headerText, fontWeight: "bold"}}>JORGE</Text>
                 </View>
-                <Image source={cancelIcon}/>
+                <Image source={profileIcon} style={styles.profIcon}/>
             </View>
             <View style={styles.listContainer}>
                 <TouchableOpacity style={styles.listItem}>
@@ -62,7 +61,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         color: "#FFF",
-        fontSize: 16
+        fontSize: 19
     },
     listContainer: {
         width: "80%",
@@ -81,6 +80,11 @@ const styles = StyleSheet.create({
     icons: {
         width: 30,
         height: 30,
+        resizeMode : 'contain'
+    },
+    profIcon: {
+        width: 80,
+        height: 80,
         resizeMode : 'contain'
     }
 })
