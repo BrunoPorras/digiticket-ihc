@@ -1,4 +1,4 @@
-const API = 'https://backend-digiticket.herokuapp.com/api/turns'
+const API = 'http://192.168.101.22:4000/api/turns'
 
 export const getTurns = async () => {
     const res = await fetch(API)
