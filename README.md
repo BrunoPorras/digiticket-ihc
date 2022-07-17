@@ -47,7 +47,7 @@ npm start
 ```
 
 
-### Ejecutar en la aplicación Expo Go
+### Expo Go
 <br/>
 
 [![Expo Go](https://img.shields.io/badge/Ejecutar_con_Expo_Go-important.svg?logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.dev/client)
