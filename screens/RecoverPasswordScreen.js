@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
-import { View, Text, Button, CheckBox, StyleSheet, TextInput, Image } from 'react-native'
-import { Icon, Input } from 'react-native-elements'
+import React from 'react'
+import { View, Text, StyleSheet, TextInput, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-
 import keyIcon from '../assets/key.png'
 import sendIcon from '../assets/send.png'
 import NewButton from '../components/buttons'
@@ -14,8 +12,9 @@ const RecoverPasswordScreen = () => {
         navigation.navigate('ChangePasswordScreen')
     }
 
+    // Falta implementar
     const user = {
-        correo: "catboy@choccito.cpp"
+        correo: "jorgevil_98@gmail.com"
     }
 
     return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { View, Text, StyleSheet, TextInput, Image, Modal } from 'react-native'
 
 import { CheckBox } from 'react-native-elements'
@@ -36,7 +36,6 @@ const HomeScreen = (props) => {
             }
         } else {
             setModalView(true)
-            console.log("MODAL HOME: ", modalView)
         }
     }
 
@@ -50,7 +49,7 @@ const HomeScreen = (props) => {
             >
                 <View style={styles.containerModalBig}>
                     <View style={styles.modalContainer}>
-                        <Text style={styles.textModal}>Usuario no encontrado, active su cuenta por favor</Text>
+                        <Text style={styles.textModal}>Usuario no encontrado</Text>
                         <NewButton
                             content_="Aceptar"
                             width_="40%"
@@ -95,10 +94,10 @@ const HomeScreen = (props) => {
             />
             <View style={styles.notAccountContainer}>
                 <Text style={styles.notAccountText}>
-                    ¿No tienes una cuenta?
+                    ¿No posees una cuenta?
                 </Text>
                 <Text style={styles.activateAccountText}>
-                    Actívala aquí
+                    Consúltalo aquí
                 </Text>
             </View>
         </View>
@@ -150,8 +149,12 @@ const styles = StyleSheet.create({
         width: "60%",
         paddingTop: 100
     },
+    notAccountText: {
+        fontSize: 12
+    },
     activateAccountText: {
-        color: "#FF5C00"
+        color: "#FF5C00",
+        fontSize: 12
     },
     icons: {
         height: 25,

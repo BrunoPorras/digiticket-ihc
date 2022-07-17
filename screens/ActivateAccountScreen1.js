@@ -4,14 +4,17 @@ import NewButton from '../components/buttons'
 import userIcon from '../assets/user.png'
 import look1Icon from '../assets/look1.png'
 import look2Icon from '../assets/look2.png'
-import { CheckBox, Input } from 'react-native-elements'
+import { CheckBox } from 'react-native-elements'
 
 import { login } from '../api/students'
 
 const ActivateAccountScreen1 = ({ navigation, route }) => {
 
     const [modalView, setModalView] = useState(false)
-    
+    const [modalIncorrectPassword, setModalIncorrectPassword] = useState(false)
+    const [modalDifferentPasswords, setModalDifferentPasswords] = useState(false)
+
+
     const handleGoBack = () => {
         navigation.navigate("HomeScreen")
     }
@@ -42,18 +45,17 @@ const ActivateAccountScreen1 = ({ navigation, route }) => {
         // correct credentials
         if (res.ok) {
             // same passwords
-            if (student.newPassword1 == student.newPassword2) {
+            if (student.newPassword1 & student.newPassword2 & student.newPassword1 == student.newPassword2) {
                 student._id = res.student._id
                 navigation.navigate("ActivateAccountScreen2", {
                     student: student
                 })
             } else {
-                //<MODAL> Las contraseñas no coinciden
-                console.log("Las contraseñas no coinciden")
+                setModalDifferentPasswords(true)
             }
         } else {
-            if (!res.correctPassword) // <MODAL> Contraseña incorrecta
-                console.log("Contraseña incorrecta")
+            if (!res.correctPassword)
+                setModalIncorrectPassword(true)
         }
     }
     const backHandler = BackHandler.addEventListener("hardwareBackPress", backHandlerF)
@@ -70,8 +72,51 @@ const ActivateAccountScreen1 = ({ navigation, route }) => {
             <Modal
                 animationType="fade"
                 transparent
-                visible={modalView}
-            >
+                visible={modalIncorrectPassword} >
+                <View style={styles.containerModalBig}>
+                    <View style={styles.modalContainer}>
+                        <Text style={styles.textModal}>
+                            Contraseña incorrecta
+                        </Text>
+                        <View style={styles.modalOptionsContainer}>
+                            <NewButton
+                                content_="Aceptar"
+                                width_="40%"
+                                color_="#FFA41D"
+                                onPress={() => {
+                                    setModalIncorrectPassword(false)
+                                }}
+                            />                            
+                        </View>
+                    </View>
+                </View>
+            </Modal>
+            <Modal
+                animationType="fade"
+                transparent
+                visible={modalDifferentPasswords} >
+                <View style={styles.containerModalBig}>
+                    <View style={styles.modalContainer}>
+                        <Text style={styles.textModal}>
+                            Contraseñas diferentes
+                        </Text>
+                        <View style={styles.modalOptionsContainer}>
+                            <NewButton
+                                    content_="Aceptar"
+                                    width_="40%"
+                                    color_="#FFA41D"
+                                    onPress={() => {
+                                        setModalDifferentPasswords(false)
+                                    }}
+                                />
+                        </View>
+                    </View>
+                </View>
+            </Modal>
+            <Modal
+                animationType="fade"
+                transparent
+                visible={modalView} >
                 <View style={styles.containerModalBig}>
                     <View style={styles.modalContainer}>
                         <Text style={styles.textModal}>

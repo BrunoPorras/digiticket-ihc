@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Button, StyleSheet, TextInput, Image } from 'react-native'
-import { Icon, Input, CheckBox } from 'react-native-elements'
-import { useNavigation } from '@react-navigation/native'
+import { View, Text, StyleSheet, TextInput, Image, Modal } from 'react-native'
+import { CheckBox } from 'react-native-elements'
 
 import lookIcon from '../assets/look1.png'
 import NewButton from '../components/buttons'
@@ -15,6 +14,9 @@ const ActivatedAccountScreen = ({ navigation, route }) => {
         university_code: '',
         password: '',
     })
+
+    const [modalView, setModalView] = useState(false)
+
     const [isSelected, setSelection] = useState(false)
 
     const handleChange = (name, value) => setStudent({ ...student, [name]: value })
@@ -31,12 +33,11 @@ const ActivatedAccountScreen = ({ navigation, route }) => {
         const res = await login(student)
         // correct credentials
         if (res.ok) {
-            console.log("Logged in")
             navigation.navigate("LandingPageScreen", {
                 student: res.student
             })            
         } else {
-            console.log("Contraseña incorrecta")
+            setModalView(true)
         }
     }
 
@@ -48,6 +49,25 @@ const ActivatedAccountScreen = ({ navigation, route }) => {
 
     return (
         <View style={styles.container}>
+            <Modal
+                animationType="fade"
+                transparent
+                visible={modalView}
+            >
+                <View style={styles.containerModalBig}>
+                    <View style={styles.modalContainer}>
+                        <Text style={styles.textModal}>Contraseña incorrecta</Text>
+                        <NewButton
+                            content_="Aceptar"
+                            width_="40%"
+                            color_="#FFA41D"
+                            onPress={() => {
+                                setModalView(false)
+                            }}
+                        />
+                    </View>
+                </View>
+            </Modal>            
             <Text style={styles.tittle}>
                 INICIAR SESIÓN
             </Text>
@@ -89,7 +109,7 @@ const ActivatedAccountScreen = ({ navigation, route }) => {
             <Text>
                 ¿No eres tú?
                 <Text onPress={handleHomePage} style={{ fontWeight: "800" }}>
-                    Ingresa con una cuenta diferente
+                    &nbsp;&nbsp;&nbsp;Ingresa con una cuenta diferente
                 </Text>
             </Text>
 
@@ -140,6 +160,26 @@ const styles = StyleSheet.create({
     forgotPassText: {
         color: "#2C4BB8",
         paddingVertical: 40
+    },
+    containerModalBig: {
+        width: "100%",
+        height: "100%",
+        backgroundColor: "rgba(0, 0, 0, 0.7)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    modalContainer: {
+        width: "90%",
+        backgroundColor: "#fff",
+        borderRadius: 10,
+        padding: 40
+    },
+    textModal: {
+        color: "#136CF1",
+        fontSize: 18,
+        textAlign: "center",
+        marginBottom: 20
     },
     differentAccountText: {
     }
